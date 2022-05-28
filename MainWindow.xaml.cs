@@ -7,9 +7,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Windows;
 using Newtonsoft.Json;
-using System.Windows.Media.Imaging;
 
-//dotnet publish Launcher.sln -r win-x64 /p:PublishSingleFile=true /p:IncludeNativeLibrariesForSelfExtract=true --self-contained true
+
+
 namespace Launcher
 {
     enum LauncherStatus
@@ -66,11 +66,9 @@ namespace Launcher
                         break;
                     case LauncherStatus.notInstalled:
                         UpdateButton.Content = "Ready to Download";
-                        //CurrentVersion.Text = "Simulator not Installed";
                         break;
                     case LauncherStatus.error:
                         UpdateButton.Content = "!! Version Mismatch";
-                        //CurrentVersion.Text = "Simulator not Installed";
                         break;
                     case LauncherStatus.checkingVersion:
                         UpdateButton.Content = "Checking Version";
@@ -108,7 +106,6 @@ namespace Launcher
                 LauncherStatus previous_status = status;
                 messageHelper(LauncherStatus.checkingVersion);
                 HttpClient client = new HttpClient();
-                //client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "DSR Simulator Launcher/0.0.1");
                 client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("DSR-Simulator-Launcher", "0.0.1"));
                 HttpResponseMessage response = await client.GetAsync(versionURL).ConfigureAwait(false);
                 response.EnsureSuccessStatusCode();
@@ -175,6 +172,7 @@ namespace Launcher
             try
             {
                 messageHelper(LauncherStatus.installing);
+                
                 ZipFile.ExtractToDirectory(downloadZipPath, simulatorPath, true);
                 File.Delete(downloadZipPath);
 
@@ -198,11 +196,10 @@ namespace Launcher
             MessageBoxResult whetherToUpdate = MessageBox.Show(content, "Downloader", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (whetherToUpdate == MessageBoxResult.Yes)
             {
-                // TODO: download file from the cloud
                 var result = await downloadZip();
                 if (!result)
                 {
-                    //status = LauncherStatus.failed;
+                    status = LauncherStatus.failed;
                 }
             }
             else
@@ -237,9 +234,7 @@ namespace Launcher
         {
             CheckCurrentVersion();
 
-            // if cloudVersion is not fetch, fetch version from cloud and check version
             bool success = await downloadVersionFile();
-            //Debug.WriteLine(success);
 
             if (!success || status == LauncherStatus.notInstalled || localVersion == Version.init)
             {
@@ -265,21 +260,17 @@ namespace Launcher
         {
             await CheckForVersion();
             
-            //Debug.WriteLine(status);
 
             if (status == LauncherStatus.notInstalled)
             {
-                // no need to fetch version file, just download simulator zip
                 AskForDownload("Do you want to download simulator?");
             }
             else if (status == LauncherStatus.readyToUpdate)
             {
-                // no need to fetch version file, just download simulator zip
                 AskForDownload("Do you want to update simulator?");
             }
             else if (status == LauncherStatus.error)
             {
-                // no need to fetch version file, just download simulator zip
                 AskForDownload($"Version Mismatch detected! Do you want to re-download simulator?\nLocal Version: {localVersion.ToString()} > Cloud Version: {cloudVersion.ToString()}");
             } 
             else if (status == LauncherStatus.failed)
@@ -294,8 +285,6 @@ namespace Launcher
 
         private async void Window_ContentRendered(object sender, EventArgs e)
         {
-            //Uri iconUri = new Uri("D:/Program Files/Unity/Project/Dragonsongs Reprisal Simulator/Launcher/Resource/main.ico", UriKind.RelativeOrAbsolute); //make sure your path is correct, and the icon set as Resource
-            //this.Icon = BitmapFrame.Create(iconUri, BitmapCreateOptions.PreservePixelFormat, BitmapCacheOption.OnLoad);
             await CheckForVersion();
         }
 
@@ -312,11 +301,13 @@ namespace Launcher
                 }
                 catch (Exception execption)
                 {
+                    status = LauncherStatus.notInstalled;
                     MessageBox.Show($"Unable to open the simulator, please download or update the simulator!\n Error message: {execption.Message}");
                 }
             }
             else
             {
+                status = LauncherStatus.notInstalled;
                 MessageBox.Show($"Simulator not detected, please download the simulator!");
             }
         }
