@@ -21,7 +21,9 @@
     <None Remove="Resource\King Thordan by Yare-Yare-Dong on DeviantArt.jpg" />
     <None Remove="Resource\launcher.jpg" />
     <None Remove="Resource\launcher_icon.ico" />
+    <None Remove="Resource\main - Copy.ico" />
     <None Remove="Resource\main.ico" />
+    <None Remove="Resource\menu.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,7 +43,13 @@
     <Resource Include="Resource\King Thordan by Yare-Yare-Dong on DeviantArt.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resource\main - Copy.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resource\main.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resource\menu.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

@@ -8,10 +8,9 @@
         WindowStartupLocation="CenterScreen"
         ContentRendered="Window_ContentRendered"
         Icon="Resource/main.ico"
-        ResizeMode="NoResize"
         Title="Launcher" Height="576" Width="960">
     <Grid>
-        <Image Stretch="UniformToFill" Source="D:\Program Files\Unity\Project\Dragonsongs Reprisal Simulator\Simulator\Assets\Scenes\menu - no copy.jpg" HorizontalAlignment="Right"/>
+        <Image Stretch="UniformToFill" Source="Resource/menu.jpg" HorizontalAlignment="Right"/>
         <Grid Name="Menu" Background="#C5E0E0E0" Height="200" Width="300">
             <Grid Name="StartSection" Height="50" Width="200" Margin="0,-75,0,0" 
                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="150" >
@@ -27,7 +26,7 @@
 
             <Grid Name="footer" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Height="30">
                 <TextBlock Name="CurrentVersion" FontSize="7" FontWeight="Bold" TextAlignment="Right" Margin="4,8,5,10" >
-                    Current Version 0.1.0
+                    Current Version 0.0.0
                 </TextBlock>
                 <TextBlock Name="AuthorName" FontSize="7" FontWeight="Bold" TextAlignment="Right" Margin="5,18,5,0">
                        <Hyperlink Name="AuthorLink" Background="Transparent" TextDecorations="" NavigateUri="https://github.com/SiegAndy" RequestNavigate="AuthorLink_RequestNavigate">
