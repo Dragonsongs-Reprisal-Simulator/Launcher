@@ -1,0 +1,49 @@
+﻿<Window x:Class="Launcher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Launcher"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ContentRendered="Window_ContentRendered"
+        Icon="Resource/main.ico"
+        ResizeMode="NoResize"
+        Title="Launcher" Height="576" Width="960">
+    <Grid>
+        <Image Stretch="UniformToFill" Source="D:\Program Files\Unity\Project\Dragonsongs Reprisal Simulator\Simulator\Assets\Scenes\menu - no copy.jpg" HorizontalAlignment="Right"/>
+        <Grid Name="Menu" Background="#C5E0E0E0" Height="200" Width="300">
+            <Grid Name="StartSection" Height="50" Width="200" Margin="0,-75,0,0" 
+                VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="150" >
+                <Button Name="StartButton" Content="Start" Click="StartButton_Click" FontSize="20" FontWeight="Bold" Background="#C5E0E0E0"/>
+            </Grid>
+
+
+            <Grid Name="UpdateSection" Height="50" Width="200" Margin="0,75,0,0" 
+                VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="150">
+                <Button x:Name="UpdateButton" Content="Check For Updates" Click="UpdateButton_Click" 
+                        FontSize="20" FontWeight="Bold" Background="#C5E0E0E0"/>
+            </Grid>
+
+            <Grid Name="footer" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="120" Height="30">
+                <TextBlock Name="CurrentVersion" FontSize="7" FontWeight="Bold" TextAlignment="Right" Margin="4,8,5,10" >
+                    Current Version 0.1.0
+                </TextBlock>
+                <TextBlock Name="AuthorName" FontSize="7" FontWeight="Bold" TextAlignment="Right" Margin="5,18,5,0">
+                       <Hyperlink Name="AuthorLink" Background="Transparent" TextDecorations="" NavigateUri="https://github.com/SiegAndy" RequestNavigate="AuthorLink_RequestNavigate">
+                           <Hyperlink.Style>
+                                <Style TargetType="Hyperlink"
+                                       BasedOn="{StaticResource {x:Type Hyperlink}}">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                </Style>
+                           </Hyperlink.Style>
+                           Created by SiegAndy#2157
+                       </Hyperlink>
+                </TextBlock>
+                
+
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
